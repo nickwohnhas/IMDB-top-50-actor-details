@@ -26,7 +26,7 @@ attr_accessor :top_50_page
   def self.create_actor(actor_url)
     @@actor_page = Nokogiri::HTML(open(actor_url))
     actor_name = @@actor_page.css('h1.header span.itemprop').text
-    # movie_array =
+    movie_array = @@actor_page.css('div #filmography div.filmo-category-section b').map{|movie_object| movie_object.text}
     binding.pry
     puts "hello"
   end
