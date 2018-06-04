@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+
+require 'bundler/setup'
+require 'imdb_top_50'
+
+
+ImdbTop50::CLI.new.call
+
