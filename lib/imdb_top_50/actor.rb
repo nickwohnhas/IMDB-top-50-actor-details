@@ -8,6 +8,7 @@ attr_accessor :movie, :bio
     @name = name
     @movies = []
     @bio = bio_str
+    movie_array.each{|movie_title_str| @movies << movie_title_str}
     @@all << self
   end
 

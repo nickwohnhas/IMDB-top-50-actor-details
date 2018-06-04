@@ -18,7 +18,7 @@ class ImdbTop50::CLI
     unless input == "exit"
 
       if input.to_i > 0 && input.to_i <= 50
-        Scraper.create_actor(@@actor_urls[input-1])
+        Scraper.create_actor(Scraper.actor_urls[input.to_i-1])
 
       else
         puts "That is not a number between 1 and 50"

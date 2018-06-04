@@ -4,7 +4,9 @@ require 'pry'
 class Scraper
 attr_accessor :top_50_page
 
-
+  def self.actor_urls
+  @@actor_urls
+  end
  #choose them with user input,
 #scrape actor web-page  for all attributes
 #create actor object from the passed-in
@@ -22,7 +24,11 @@ attr_accessor :top_50_page
 # self. actor page scraper
 
   def self.create_actor(actor_url)
-    @actor_page = Nokogiri::HTML(open(actor_url))
+    @@actor_page = Nokogiri::HTML(open(actor_url))
+    actor_name = @@actor_page.css('h1.header span.itemprop').text
+    # movie_array =
+    binding.pry
+    puts "hello"
   end
 
 
