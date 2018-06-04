@@ -18,8 +18,8 @@ class ImdbTop50::CLI
     unless input == "exit"
 
       if input.to_i > 0 && input.to_i <= 50
-        # Actor.find_or_create_by_name
-        puts "valid input"
+        Scraper.create_actor(@@actor_urls[input-1])
+
       else
         puts "That is not a number between 1 and 50"
         choose_actor
