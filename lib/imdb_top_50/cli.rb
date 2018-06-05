@@ -18,7 +18,10 @@ class ImdbTop50::CLI
     unless input == "exit"
 
       if input.to_i > 0 && input.to_i <= 50
-        Scraper.create_actor(Scraper.actor_urls[input.to_i-1])
+        urls = Scraper.actor_urls[input.to_i-1]
+        actor = Scraper.create_or_find_actor(urls)
+
+        actor_menu(actor)
 
       else
         puts "That is not a number between 1 and 50"
@@ -37,8 +40,8 @@ class ImdbTop50::CLI
       if input == 'list actors'
         list_actors
       elsif input == 'prev actors'
-        # Actor.all
-        puts "works"
+         Actor.all
+        binding.pry
       else
         puts "please enter a valid option"
         menu
@@ -46,4 +49,28 @@ class ImdbTop50::CLI
     end
   end
 
+  def actor_menu(actor)
+    print_actor_menu(actor)
+    input = gets.strip
+
+    if input == 'bio'
+      puts actor.bio
+      actor_menu(actor)
+    elsif input == 'list movies'
+      actor.display_movies # Actor.last_actor.movies
+      actor_menu(actor)
+    elsif input == 'return'
+      choose_actor
+    else
+      puts "Sorry, that's not a valid option."
+      actor_menu(actor)
+    end  # case statement ?
+  end
+
+  def print_actor_menu(actor)
+    puts "**#{actor.name}**"
+    puts "To display the actor's bio, type 'bio'."
+    puts "To list the actors movies, type 'list movies'."
+    puts "To return to the top 50 actor list, type 'return'."
+  end
 end

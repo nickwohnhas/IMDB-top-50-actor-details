@@ -1,14 +1,14 @@
 class Actor
 attr_reader  :name
-attr_accessor :movie, :bio
+attr_accessor :bio, :movies, :url
 
 @@all = []
 
-  def initialize(name, movie_array, bio_str)
+  def initialize(name, movie_array, bio_str, url)
     @name = name
-    @movies = []
+    @movies = movie_array
     @bio = bio_str
-    movie_array.each{|movie_title_str| @movies << movie_title_str}
+    @url = url
     @@all << self
   end
 
@@ -16,7 +16,9 @@ attr_accessor :movie, :bio
     @@all
   end
 
-
-
-
+  def display_movies # movies and putsing movies are seperate concerns
+    @movies.each.with_index(1) do |movie_str, index|
+      puts "#{index}. #{movie_str}"
+    end
+  end
 end
