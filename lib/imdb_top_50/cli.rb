@@ -1,5 +1,6 @@
 class ImdbTop50::CLI
   def call
+    clear_page
     puts 'Welcome to IMDB top 50!'
     menu
   end
@@ -38,7 +39,7 @@ class ImdbTop50::CLI
         list_actors
       elsif input == 'prev actors'
         Actor.prev_actors
-
+        menu
       else
         puts 'please enter a valid option'
         menu
@@ -76,5 +77,9 @@ class ImdbTop50::CLI
     puts "To list all the previously chosen actors, type 'prev actors'."
     puts "Type 'exit' to end the program."
     puts '-------------------------------------------------------------'
+  end
+
+  def clear_page
+    system "clear"
   end
 end

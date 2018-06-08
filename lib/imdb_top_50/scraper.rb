@@ -20,10 +20,9 @@ class Scraper
   end
 
   def self.create_or_find_actor(actor_url)
-    actor_page = Nokogiri::HTML(open(actor_url))
     actor_bio_page = Nokogiri::HTML(open("#{actor_url}/bio?ref_=nm_ov_bio_sm")) # same here
-    actor_name = actor_page.css('h1.header span.itemprop').text
-    movie_array = actor_page.css('div #filmography div.filmo-category-section b').map(&:text)
+    actor_name = actor_page(actor_url).css('h1.header span.itemprop').text
+    movie_array = actor_page(actor_url).css('div #filmography div.filmo-category-section b').map(&:text)
     bio = actor_bio_page.css('div.soda p').text.strip
 
     unless Actor.all.empty?
@@ -37,5 +36,9 @@ class Scraper
       end
     end
     actor = Actor.new(actor_name, movie_array, bio, actor_url)
+  end
+
+  def self.actor_page(actor_url)
+    Nokogiri::HTML(open(actor_url))
   end
 end
