@@ -6,7 +6,7 @@ class ImdbTop50::CLI
   end
 
   def list_actors
-    # iterate through the @@all array.  Should be created in order
+
     puts 'Here is a current list of the top 50 most popular actors on IMDB:'
     Scraper.top_50_page('https://www.imdb.com/search/name?gender=male,female&ref_=nv_tp_cel_1')
     choose_actor
@@ -55,21 +55,26 @@ class ImdbTop50::CLI
       puts actor.bio
       actor_menu(actor)
     elsif input == 'list movies'
-      actor.display_movies # Actor.last_actor.movies
+      actor.display_movies
       actor_menu(actor)
+    elsif input == 'list actors'
+      list_actors
     elsif input == 'return'
       choose_actor
+    elsif input == 'exit'
     else
       puts "Sorry, that's not a valid option."
       actor_menu(actor)
-    end # case statement ?
+    end
   end
 
   def print_actor_menu(actor)
     puts "**#{actor.name}**"
     puts "To display the actor's bio, type 'bio'."
     puts "To list the actors movies, type 'list movies'."
+    puts "To list the top 50 actors again, type 'list actors'."
     puts "To return to the top 50 actor list, type 'return'."
+    puts "Type 'exit' to end the program"
   end
 
   def menu_options

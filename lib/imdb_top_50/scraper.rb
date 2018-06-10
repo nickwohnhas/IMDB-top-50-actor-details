@@ -30,12 +30,12 @@ class Scraper
         if actor_url == actor_object.url
           return actor_object
         else
-          actor = Actor.new(actor_name, movie_array, bio, actor_url)
-          return actor
+         return Actor.new(actor_name, movie_array, bio, actor_url)
+
         end
       end
     end
-    actor = Actor.new(actor_name, movie_array, bio, actor_url)
+    Actor.new(actor_name, movie_array, bio, actor_url)
   end
 
   def self.actor_page(actor_url)
